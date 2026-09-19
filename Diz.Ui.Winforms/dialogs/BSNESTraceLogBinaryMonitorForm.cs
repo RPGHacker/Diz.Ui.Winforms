@@ -30,7 +30,7 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
     
     private void btnFinish_Click(object sender, EventArgs e)
     {
-        captureController.SignalToStop();
+        captureController.SignalToStop(Core.util.TaskManagerResult.Succeeded);
         UpdateUi();
     }
 
@@ -60,6 +60,6 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
             return;
         
         Console.WriteLine(e.ToString());
-        lastError = e.InnerExceptions.Select(ex => ex.Message).Aggregate((line, val) => line += val + "\n");
+        lastError = e.InnerExceptions.Select(ex => ex.GetType().FullName + " was thrown: " + ex.Message).Aggregate((line, val) => line += val + "\n");
     }
 }
