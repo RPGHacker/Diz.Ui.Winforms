@@ -62,7 +62,7 @@ public partial class MainWindow
             return;
             
         var captureController = new BsnesTraceLogCaptureController(snesData);
-        new BsnesTraceLogBinaryMonitorForm(captureController).ShowDialog();
+        new BsnesTraceLogBinaryMonitorForm(captureController, Project.ProjectUserSettings.LiveCaptureSettings).ShowDialog();
             
         RefreshUi();
     }

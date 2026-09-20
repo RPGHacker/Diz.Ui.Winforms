@@ -1,4 +1,5 @@
-﻿using Diz.Import.bsnes.tracelog;
+﻿using Diz.Core.model;
+using Diz.Import.bsnes.tracelog;
 using Diz.Ui.Winforms.util;
 
 namespace Diz.Ui.Winforms.dialogs;
@@ -11,12 +12,18 @@ namespace Diz.Ui.Winforms.dialogs;
 public partial class BsnesTraceLogBinaryMonitorForm : Form
 {
     private readonly BsnesTraceLogCaptureController captureController;
+    private LiveCaptureUserSettings settings;
     private string lastError = "";
 
-    public BsnesTraceLogBinaryMonitorForm(BsnesTraceLogCaptureController captureController)
+    public BsnesTraceLogBinaryMonitorForm(BsnesTraceLogCaptureController captureController, LiveCaptureUserSettings settings)
     {
         this.captureController = captureController;
+        this.settings = settings;
+
         InitializeComponent();
+
+        textBoxConnectionHost.Text = this.settings.LiveCaptureHostName;
+        numericUpDownConnectionPort.Value = this.settings.LiveCapturePort;
     }
 
     private void btnStart_Click(object sender, EventArgs e)
@@ -24,6 +31,9 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
         timer1.Enabled = true;
         btnFinish.Enabled = true;
         btnStart.Enabled = false;
+
+        this.settings.LiveCaptureHostName = textBoxConnectionHost.Text;
+        this.settings.LiveCapturePort = (short)numericUpDownConnectionPort.Value;
 
         Start();
     }
@@ -38,7 +48,7 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
     {
         // TODO: this thread stuff should really go into the Controller and it should call US for notifications
         // TODO: error handling is busted here.
-        await Task.Run(() => captureController.Run()).ContinueWith(OnCapturingFinishedException);
+        await Task.Run(() => captureController.Run(this.settings)).ContinueWith(OnCapturingFinishedException);
         UpdateUi();
     }
 
