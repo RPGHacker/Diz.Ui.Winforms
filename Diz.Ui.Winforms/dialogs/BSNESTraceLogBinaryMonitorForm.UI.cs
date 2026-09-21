@@ -56,13 +56,39 @@ public partial class BsnesTraceLogBinaryMonitorForm
     {
         var running = captureController?.Running ?? false;
         var finishing = captureController?.Finishing ?? false;
+        var connecting = captureController?.EstablishingConnection ?? false;
 
-        lblStatus.Text = !running ? "Not running" : finishing ? "Stopping..." : "Running";
+        bool showStatusSpinner = false;
+        bool showResultSpinner = false;
+
+        lblStatus.Text = "Not running";
+        lblStatus.ForeColor = Color.Red;
+        if (running)
+        {
+            if (connecting)
+            {
+                lblStatus.Text = "Connecting...";
+                lblStatus.ForeColor = Color.DodgerBlue;
+                showStatusSpinner = true;
+            }
+            else if (finishing)
+            {
+                lblStatus.Text = "Stopping...";
+                showStatusSpinner = true;
+            }
+            else
+            {
+                lblStatus.Text = "Running";
+                lblStatus.ForeColor = Color.ForestGreen;
+                showResultSpinner = true;
+            }
+        }
 
         btnFinish.Enabled = !finishing && running;
         btnStart.Enabled = !running;
 
-        pictureGreenSpinner.Visible = pictureGreenSpinner.Enabled = running;
+        pictureSpinnerStatus.Visible = pictureSpinnerStatus.Enabled = showStatusSpinner;
+        pictureSpinnerResult.Visible = pictureSpinnerResult.Enabled = showResultSpinner;
 
         if (running)
         {

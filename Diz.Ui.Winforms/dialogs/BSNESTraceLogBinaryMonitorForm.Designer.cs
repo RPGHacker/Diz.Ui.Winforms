@@ -56,7 +56,7 @@
             label17 = new Label();
             lblResultStatus = new Label();
             label7 = new Label();
-            pictureGreenSpinner = new PictureBox();
+            pictureSpinnerResult = new PictureBox();
             button1 = new Button();
             chkAddTLComments = new CheckBox();
             chkRemoveTLComments = new CheckBox();
@@ -69,8 +69,10 @@
             label18 = new Label();
             numericUpDownConnectionPort = new NumericUpDown();
             label19 = new Label();
-            ((System.ComponentModel.ISupportInitialize)pictureGreenSpinner).BeginInit();
+            pictureSpinnerStatus = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureSpinnerResult).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownConnectionPort).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureSpinnerStatus).BeginInit();
             SuspendLayout();
             // 
             // btnStart
@@ -335,16 +337,16 @@
             label7.TabIndex = 25;
             label7.Text = "Result";
             // 
-            // pictureGreenSpinner
+            // pictureSpinnerResult
             // 
-            pictureGreenSpinner.Image = Properties.Resources._1603231497loading_green;
-            pictureGreenSpinner.Location = new Point(67, 9);
-            pictureGreenSpinner.Margin = new Padding(4, 3, 4, 3);
-            pictureGreenSpinner.Name = "pictureGreenSpinner";
-            pictureGreenSpinner.Size = new Size(41, 25);
-            pictureGreenSpinner.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureGreenSpinner.TabIndex = 27;
-            pictureGreenSpinner.TabStop = false;
+            pictureSpinnerResult.Image = Properties.Resources._1603231497loading_green;
+            pictureSpinnerResult.Location = new Point(67, 9);
+            pictureSpinnerResult.Margin = new Padding(4, 3, 4, 3);
+            pictureSpinnerResult.Name = "pictureSpinnerResult";
+            pictureSpinnerResult.Size = new Size(41, 25);
+            pictureSpinnerResult.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureSpinnerResult.TabIndex = 27;
+            pictureSpinnerResult.TabStop = false;
             // 
             // button1
             // 
@@ -462,11 +464,23 @@
             label19.TabIndex = 42;
             label19.Text = "Settings";
             // 
+            // pictureSpinnerStatus
+            // 
+            pictureSpinnerStatus.Image = Properties.Resources._1603231497loading_green;
+            pictureSpinnerStatus.Location = new Point(155, 123);
+            pictureSpinnerStatus.Margin = new Padding(4, 3, 4, 3);
+            pictureSpinnerStatus.Name = "pictureSpinnerStatus";
+            pictureSpinnerStatus.Size = new Size(16, 25);
+            pictureSpinnerStatus.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureSpinnerStatus.TabIndex = 43;
+            pictureSpinnerStatus.TabStop = false;
+            // 
             // BsnesTraceLogBinaryMonitorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(749, 557);
+            Controls.Add(pictureSpinnerStatus);
             Controls.Add(label19);
             Controls.Add(numericUpDownConnectionPort);
             Controls.Add(label18);
@@ -479,7 +493,7 @@
             Controls.Add(chkRemoveTLComments);
             Controls.Add(chkAddTLComments);
             Controls.Add(button1);
-            Controls.Add(pictureGreenSpinner);
+            Controls.Add(pictureSpinnerResult);
             Controls.Add(lblResultStatus);
             Controls.Add(label7);
             Controls.Add(label17);
@@ -511,8 +525,9 @@
             Text = "Emulator Live Tracelog Capture";
             Load += BSNESTraceLogBinaryMonitorForm_Load;
             Shown += BSNESTraceLogBinaryMonitorForm_Shown;
-            ((System.ComponentModel.ISupportInitialize)pictureGreenSpinner).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureSpinnerResult).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownConnectionPort).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureSpinnerStatus).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -546,7 +561,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label lblResultStatus;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.PictureBox pictureGreenSpinner;
+        private System.Windows.Forms.PictureBox pictureSpinnerResult;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox chkAddTLComments;
         private System.Windows.Forms.CheckBox chkRemoveTLComments;
@@ -559,6 +574,7 @@
         private Label label18;
         private NumericUpDown numericUpDownConnectionPort;
         private Label label19;
+        private PictureBox pictureSpinnerStatus;
         // private LiveCharts.WinForms.CartesianChart cartesianChart1;
     }
 }
