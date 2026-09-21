@@ -383,11 +383,12 @@
             // 
             // txtTracelogComment
             // 
+            txtTracelogComment.Enabled = false;
             txtTracelogComment.Location = new Point(22, 515);
             txtTracelogComment.Name = "txtTracelogComment";
             txtTracelogComment.Size = new Size(348, 23);
             txtTracelogComment.TabIndex = 32;
-            txtTracelogComment.TextChanged += txtTracelogComment_TextChanged;
+            txtTracelogComment.Leave += txtTracelogComment_Leave;
             // 
             // label2
             // 

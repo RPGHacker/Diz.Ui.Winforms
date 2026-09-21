@@ -24,6 +24,13 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
 
         textBoxConnectionHost.Text = this.settings.LiveCaptureHostName;
         numericUpDownConnectionPort.Value = this.settings.LiveCapturePort;
+
+        chkRemoveTLComments.Checked = this.settings.RemoveTracelogLabels;
+        chkAddTLComments.Checked = this.settings.AddTracelogLabel;
+        txtTracelogComment.Text = this.settings.CommentTextToAdd;
+        chkCaptureLabelsOnly.Checked = this.settings.CaptureLabelsOnly;
+
+        txtTracelogComment.Enabled = chkAddTLComments.Checked;
     }
 
     private void btnStart_Click(object sender, EventArgs e)
@@ -37,7 +44,7 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
 
         Start();
     }
-    
+
     private void btnFinish_Click(object sender, EventArgs e)
     {
         captureController.SignalToStop(Core.util.TaskManagerResult.Succeeded);
@@ -48,7 +55,7 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
     {
         // TODO: this thread stuff should really go into the Controller and it should call US for notifications
         // TODO: error handling is busted here.
-        await Task.Run(() => captureController.Run(this.settings)).ContinueWith(OnCapturingFinishedException);
+        await Task.Run(() => captureController.Run()).ContinueWith(OnCapturingFinishedException);
         UpdateUi();
     }
 
@@ -56,9 +63,12 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
 
     private void CapturingFinished(AggregateException? ex)
     {
-        if (ex != null) {
+        if (ex != null)
+        {
             OnError(ex);
-        } else {
+        }
+        else
+        {
             OnSuccess();
         }
 
@@ -70,7 +80,7 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
     {
         if (e == null)
             return;
-        
+
         Console.WriteLine(e.ToString());
         lastError = e.InnerExceptions.Select(ex => ex.GetType().FullName + " was thrown: " + ex.Message).Aggregate((line, val) => line += val + "\n");
     }

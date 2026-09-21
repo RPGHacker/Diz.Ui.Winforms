@@ -127,18 +127,9 @@ public partial class BsnesTraceLogBinaryMonitorForm
         lblModifiedFlags.Text = ByteSize.FromBytes(stats.NumMarksModified).ToString("0.00");
         lblModifiedXFlags.Text = ByteSize.FromBytes(stats.NumXFlagsModified).ToString("0.00");
         lblModifiedMFlags.Text = ByteSize.FromBytes(stats.NumMFlagsModified).ToString("0.00");
-        
+
         // TODO: implement me. this one will also go up and down.
         // lblNumCommentsMarked.Text = ByteSize.FromBytes(stats.NumCommentsMarked).ToString("0.00");
-        
-
-        captureController.CaptureSettings = new BsnesTraceLogCaptureController.TraceLogCaptureSettings
-        {
-            RemoveTracelogLabels = chkRemoveTLComments.Checked,
-            AddTracelogLabel = chkAddTLComments.Checked,
-            CommentTextToAdd = !chkAddTLComments.Checked ? "" : txtTracelogComment.Text,
-            CaptureLabelsOnly = chkCaptureLabelsOnly.Checked
-        };
     }
 
     private void btnTracelogHelpClick(object sender, EventArgs e)
@@ -160,19 +151,31 @@ public partial class BsnesTraceLogBinaryMonitorForm
                         "can flush any remaining buffers. Otherwise some data might get lost.\r\n");
     }
     
-            
-    private void txtTracelogComment_TextChanged(object sender, EventArgs e)
+
+    // This one is in "Leave" rather than "TextChanged" so that whenever we change the comment
+    // while a capture is running, the unfinished string won't affect what the capture writes
+    // to our output.
+    private void txtTracelogComment_Leave(object sender, EventArgs e)
     {
-        // as soon as they type anything, disable it so they have to click the checkbox.
-        // prevent half-typed text from spamming up everything.
-        chkAddTLComments.Checked = false;
-        chkRemoveTLComments.Checked = false;
-        UpdateUi();
+        settings.CommentTextToAdd = txtTracelogComment.Text;
     }
 
-    private void chkAddTLComments_CheckedChanged(object sender, EventArgs e) => UpdateUi();
-    private void chkRemoveTLComments_CheckedChanged(object sender, EventArgs e) => UpdateUi();
-    private void chkCaptureLabelsOnly_CheckedChanged(object sender, EventArgs e) => UpdateUi();
+    private void chkAddTLComments_CheckedChanged(object sender, EventArgs e)
+    {
+        settings.AddTracelogLabel = chkAddTLComments.Checked;
+        txtTracelogComment.Enabled = chkAddTLComments.Checked;
+    }
+
+    private void chkRemoveTLComments_CheckedChanged(object sender, EventArgs e)
+    {
+        settings.RemoveTracelogLabels = chkRemoveTLComments.Checked;
+    }
+
+    private void chkCaptureLabelsOnly_CheckedChanged(object sender, EventArgs e)
+    {
+        settings.CaptureLabelsOnly = chkCaptureLabelsOnly.Checked;
+    }
+
     private void BSNESTraceLogBinaryMonitorForm_Load(object sender, EventArgs e) => UpdateUi();
     private void BSNESTraceLogBinaryMonitorForm_Shown(object sender, EventArgs e) => UpdateUi();
     private void timer1_Tick(object sender, EventArgs e) => UpdateUi();

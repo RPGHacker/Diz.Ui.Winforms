@@ -1069,7 +1069,7 @@ partial class MainWindow
         this.importTraceLogBinary.Name = "importTraceLogBinary";
         this.importTraceLogBinary.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F5)));
         this.importTraceLogBinary.Size = new System.Drawing.Size(253, 22);
-        this.importTraceLogBinary.Text = "BSNESPlus Trace Logging";
+        this.importTraceLogBinary.Text = "Emulator Live Tracelog Capture";
         this.importTraceLogBinary.Click += new System.EventHandler(this.importTraceLogBinary_Click);
         // 
         // helpToolStripMenuItem
