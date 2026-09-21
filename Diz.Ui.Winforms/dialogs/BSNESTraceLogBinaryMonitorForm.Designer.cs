@@ -62,20 +62,20 @@
             chkRemoveTLComments = new CheckBox();
             txtTracelogComment = new TextBox();
             label2 = new Label();
-            label9 = new Label();
             label11 = new Label();
             chkCaptureLabelsOnly = new CheckBox();
             textBoxConnectionHost = new TextBox();
             label13 = new Label();
             label18 = new Label();
             numericUpDownConnectionPort = new NumericUpDown();
+            label19 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureGreenSpinner).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownConnectionPort).BeginInit();
             SuspendLayout();
             // 
             // btnStart
             // 
-            btnStart.Location = new Point(558, 14);
+            btnStart.Location = new Point(661, 14);
             btnStart.Margin = new Padding(4, 3, 4, 3);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(75, 44);
@@ -87,7 +87,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(18, 51);
+            label1.Location = new Point(18, 153);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(64, 15);
@@ -97,7 +97,7 @@
             // lblQueueSize
             // 
             lblQueueSize.AutoSize = true;
-            lblQueueSize.Location = new Point(174, 51);
+            lblQueueSize.Location = new Point(174, 153);
             lblQueueSize.Margin = new Padding(4, 0, 4, 0);
             lblQueueSize.Name = "lblQueueSize";
             lblQueueSize.Size = new Size(17, 15);
@@ -112,7 +112,7 @@
             // btnFinish
             // 
             btnFinish.Enabled = false;
-            btnFinish.Location = new Point(482, 14);
+            btnFinish.Location = new Point(585, 14);
             btnFinish.Margin = new Padding(4, 3, 4, 3);
             btnFinish.Name = "btnFinish";
             btnFinish.Size = new Size(69, 44);
@@ -124,7 +124,7 @@
             // lblTotalProcessed
             // 
             lblTotalProcessed.AutoSize = true;
-            lblTotalProcessed.Location = new Point(447, 250);
+            lblTotalProcessed.Location = new Point(490, 127);
             lblTotalProcessed.Margin = new Padding(4, 0, 4, 0);
             lblTotalProcessed.Name = "lblTotalProcessed";
             lblTotalProcessed.Size = new Size(17, 15);
@@ -134,7 +134,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(301, 250);
+            label4.Location = new Point(344, 127);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(130, 15);
@@ -144,7 +144,7 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(174, 28);
+            lblStatus.Location = new Point(174, 127);
             lblStatus.Margin = new Padding(4, 0, 4, 0);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(17, 15);
@@ -154,7 +154,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(15, 28);
+            label5.Location = new Point(18, 127);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(39, 15);
@@ -164,7 +164,7 @@
             // lblNumberModified
             // 
             lblNumberModified.AutoSize = true;
-            lblNumberModified.Location = new Point(447, 279);
+            lblNumberModified.Location = new Point(490, 153);
             lblNumberModified.Margin = new Padding(4, 0, 4, 0);
             lblNumberModified.Name = "lblNumberModified";
             lblNumberModified.Size = new Size(17, 15);
@@ -174,7 +174,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(301, 279);
+            label3.Location = new Point(344, 153);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(130, 15);
@@ -184,7 +184,7 @@
             // lblModifiedXFlags
             // 
             lblModifiedXFlags.AutoSize = true;
-            lblModifiedXFlags.Location = new Point(174, 136);
+            lblModifiedXFlags.Location = new Point(174, 234);
             lblModifiedXFlags.Margin = new Padding(4, 0, 4, 0);
             lblModifiedXFlags.Name = "lblModifiedXFlags";
             lblModifiedXFlags.Size = new Size(17, 15);
@@ -194,7 +194,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(18, 136);
+            label6.Location = new Point(18, 234);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Size = new Size(44, 15);
@@ -204,7 +204,7 @@
             // lblModifiedMFlags
             // 
             lblModifiedMFlags.AutoSize = true;
-            lblModifiedMFlags.Location = new Point(174, 166);
+            lblModifiedMFlags.Location = new Point(174, 262);
             lblModifiedMFlags.Margin = new Padding(4, 0, 4, 0);
             lblModifiedMFlags.Name = "lblModifiedMFlags";
             lblModifiedMFlags.Size = new Size(17, 15);
@@ -214,7 +214,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(18, 166);
+            label8.Location = new Point(18, 262);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
             label8.Size = new Size(48, 15);
@@ -224,7 +224,7 @@
             // lblModifiedDPs
             // 
             lblModifiedDPs.AutoSize = true;
-            lblModifiedDPs.Location = new Point(174, 194);
+            lblModifiedDPs.Location = new Point(174, 288);
             lblModifiedDPs.Margin = new Padding(4, 0, 4, 0);
             lblModifiedDPs.Name = "lblModifiedDPs";
             lblModifiedDPs.Size = new Size(17, 15);
@@ -234,7 +234,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(18, 194);
+            label10.Location = new Point(18, 288);
             label10.Margin = new Padding(4, 0, 4, 0);
             label10.Name = "label10";
             label10.Size = new Size(67, 15);
@@ -244,7 +244,7 @@
             // lblModifiedDBs
             // 
             lblModifiedDBs.AutoSize = true;
-            lblModifiedDBs.Location = new Point(174, 223);
+            lblModifiedDBs.Location = new Point(174, 315);
             lblModifiedDBs.Margin = new Padding(4, 0, 4, 0);
             lblModifiedDBs.Name = "lblModifiedDBs";
             lblModifiedDBs.Size = new Size(17, 15);
@@ -254,7 +254,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(18, 223);
+            label12.Location = new Point(18, 315);
             label12.Margin = new Padding(4, 0, 4, 0);
             label12.Name = "label12";
             label12.Size = new Size(60, 15);
@@ -264,7 +264,7 @@
             // lblModifiedFlags
             // 
             lblModifiedFlags.AutoSize = true;
-            lblModifiedFlags.Location = new Point(174, 108);
+            lblModifiedFlags.Location = new Point(174, 208);
             lblModifiedFlags.Margin = new Padding(4, 0, 4, 0);
             lblModifiedFlags.Name = "lblModifiedFlags";
             lblModifiedFlags.Size = new Size(17, 15);
@@ -274,7 +274,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(18, 108);
+            label14.Location = new Point(18, 208);
             label14.Margin = new Padding(4, 0, 4, 0);
             label14.Name = "label14";
             label14.Size = new Size(139, 15);
@@ -285,7 +285,7 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
-            label15.Location = new Point(14, 84);
+            label15.Location = new Point(14, 184);
             label15.Margin = new Padding(4, 0, 4, 0);
             label15.Name = "label15";
             label15.Size = new Size(194, 13);
@@ -296,7 +296,7 @@
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
-            label16.Location = new Point(14, 8);
+            label16.Location = new Point(14, 103);
             label16.Margin = new Padding(4, 0, 4, 0);
             label16.Name = "label16";
             label16.Size = new Size(124, 13);
@@ -307,7 +307,7 @@
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
-            label17.Location = new Point(297, 225);
+            label17.Location = new Point(340, 103);
             label17.Margin = new Padding(4, 0, 4, 0);
             label17.Name = "label17";
             label17.Size = new Size(57, 13);
@@ -317,19 +317,18 @@
             // lblResultStatus
             // 
             lblResultStatus.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblResultStatus.Location = new Point(396, 151);
+            lblResultStatus.Location = new Point(70, 14);
             lblResultStatus.Margin = new Padding(4, 0, 4, 0);
             lblResultStatus.Name = "lblResultStatus";
-            lblResultStatus.Size = new Size(340, 69);
+            lblResultStatus.Size = new Size(379, 75);
             lblResultStatus.TabIndex = 26;
-            lblResultStatus.Text = "--jhgasdjhfgasjhdgfhjasdfgasdf kfhfjhf";
-            lblResultStatus.TextAlign = ContentAlignment.TopRight;
+            lblResultStatus.Text = resources.GetString("lblResultStatus.Text");
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
-            label7.Location = new Point(301, 136);
+            label7.Location = new Point(15, 14);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
             label7.Size = new Size(43, 13);
@@ -338,18 +337,18 @@
             // 
             // pictureGreenSpinner
             // 
-            pictureGreenSpinner.Location = new Point(354, 14);
+            pictureGreenSpinner.Image = Properties.Resources._1603231497loading_green;
+            pictureGreenSpinner.Location = new Point(67, 9);
             pictureGreenSpinner.Margin = new Padding(4, 3, 4, 3);
             pictureGreenSpinner.Name = "pictureGreenSpinner";
-            pictureGreenSpinner.Size = new Size(54, 43);
+            pictureGreenSpinner.Size = new Size(41, 25);
             pictureGreenSpinner.SizeMode = PictureBoxSizeMode.Zoom;
             pictureGreenSpinner.TabIndex = 27;
             pictureGreenSpinner.TabStop = false;
             // 
             // button1
             // 
-            button1.Enabled = false;
-            button1.Location = new Point(414, 14);
+            button1.Location = new Point(517, 14);
             button1.Margin = new Padding(4, 3, 4, 3);
             button1.Name = "button1";
             button1.Size = new Size(61, 44);
@@ -361,7 +360,7 @@
             // chkAddTLComments
             // 
             chkAddTLComments.AutoSize = true;
-            chkAddTLComments.Location = new Point(12, 441);
+            chkAddTLComments.Location = new Point(22, 490);
             chkAddTLComments.Name = "chkAddTLComments";
             chkAddTLComments.Size = new Size(284, 19);
             chkAddTLComments.TabIndex = 30;
@@ -372,7 +371,7 @@
             // chkRemoveTLComments
             // 
             chkRemoveTLComments.AutoSize = true;
-            chkRemoveTLComments.Location = new Point(12, 400);
+            chkRemoveTLComments.Location = new Point(22, 449);
             chkRemoveTLComments.Name = "chkRemoveTLComments";
             chkRemoveTLComments.Size = new Size(358, 19);
             chkRemoveTLComments.TabIndex = 31;
@@ -382,7 +381,7 @@
             // 
             // txtTracelogComment
             // 
-            txtTracelogComment.Location = new Point(12, 466);
+            txtTracelogComment.Location = new Point(22, 515);
             txtTracelogComment.Name = "txtTracelogComment";
             txtTracelogComment.Size = new Size(348, 23);
             txtTracelogComment.TabIndex = 32;
@@ -391,26 +390,16 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(46, 492);
+            label2.Location = new Point(394, 448);
             label2.Name = "label2";
             label2.Size = new Size(307, 90);
             label2.TabIndex = 33;
             label2.Text = resources.GetString("label2.Text");
             // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold | FontStyle.Underline);
-            label9.Location = new Point(11, 341);
-            label9.Name = "label9";
-            label9.Size = new Size(110, 20);
-            label9.TabIndex = 34;
-            label9.Text = "---GOODIES---";
-            // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(14, 422);
+            label11.Location = new Point(24, 471);
             label11.Name = "label11";
             label11.Size = new Size(68, 15);
             label11.TabIndex = 35;
@@ -419,7 +408,7 @@
             // chkCaptureLabelsOnly
             // 
             chkCaptureLabelsOnly.AutoSize = true;
-            chkCaptureLabelsOnly.Location = new Point(11, 375);
+            chkCaptureLabelsOnly.Location = new Point(22, 424);
             chkCaptureLabelsOnly.Name = "chkCaptureLabelsOnly";
             chkCaptureLabelsOnly.Size = new Size(200, 19);
             chkCaptureLabelsOnly.TabIndex = 36;
@@ -429,7 +418,7 @@
             // 
             // textBoxConnectionHost
             // 
-            textBoxConnectionHost.Location = new Point(342, 81);
+            textBoxConnectionHost.Location = new Point(59, 391);
             textBoxConnectionHost.Name = "textBoxConnectionHost";
             textBoxConnectionHost.Size = new Size(174, 23);
             textBoxConnectionHost.TabIndex = 37;
@@ -438,7 +427,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(301, 84);
+            label13.Location = new Point(18, 394);
             label13.Name = "label13";
             label13.Size = new Size(35, 15);
             label13.TabIndex = 39;
@@ -447,7 +436,7 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(536, 84);
+            label18.Location = new Point(253, 394);
             label18.Name = "label18";
             label18.Size = new Size(32, 15);
             label18.TabIndex = 40;
@@ -455,25 +444,36 @@
             // 
             // numericUpDownConnectionPort
             // 
-            numericUpDownConnectionPort.Location = new Point(574, 82);
+            numericUpDownConnectionPort.Location = new Point(291, 392);
             numericUpDownConnectionPort.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
             numericUpDownConnectionPort.Name = "numericUpDownConnectionPort";
             numericUpDownConnectionPort.Size = new Size(75, 23);
             numericUpDownConnectionPort.TabIndex = 41;
             numericUpDownConnectionPort.Value = new decimal(new int[] { 27015, 0, 0, 0 });
             // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold | FontStyle.Underline);
+            label19.Location = new Point(11, 366);
+            label19.Margin = new Padding(4, 0, 4, 0);
+            label19.Name = "label19";
+            label19.Size = new Size(66, 20);
+            label19.TabIndex = 42;
+            label19.Text = "Settings";
+            // 
             // BsnesTraceLogBinaryMonitorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(749, 620);
+            ClientSize = new Size(749, 557);
+            Controls.Add(label19);
             Controls.Add(numericUpDownConnectionPort);
             Controls.Add(label18);
             Controls.Add(label13);
             Controls.Add(textBoxConnectionHost);
             Controls.Add(chkCaptureLabelsOnly);
             Controls.Add(label11);
-            Controls.Add(label9);
             Controls.Add(label2);
             Controls.Add(txtTracelogComment);
             Controls.Add(chkRemoveTLComments);
@@ -552,13 +552,13 @@
         private System.Windows.Forms.CheckBox chkRemoveTLComments;
         private System.Windows.Forms.TextBox txtTracelogComment;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox chkCaptureLabelsOnly;
         private TextBox textBoxConnectionHost;
         private Label label13;
         private Label label18;
         private NumericUpDown numericUpDownConnectionPort;
+        private Label label19;
         // private LiveCharts.WinForms.CartesianChart cartesianChart1;
     }
 }

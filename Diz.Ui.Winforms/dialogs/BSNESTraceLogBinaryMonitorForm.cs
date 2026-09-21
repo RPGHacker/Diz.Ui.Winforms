@@ -58,6 +58,8 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
     {
         if (ex != null) {
             OnError(ex);
+        } else {
+            OnSuccess();
         }
 
         timer1.Enabled = false;
@@ -71,5 +73,10 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
         
         Console.WriteLine(e.ToString());
         lastError = e.InnerExceptions.Select(ex => ex.GetType().FullName + " was thrown: " + ex.Message).Aggregate((line, val) => line += val + "\n");
+    }
+
+    private void OnSuccess()
+    {
+        lastError = "";
     }
 }

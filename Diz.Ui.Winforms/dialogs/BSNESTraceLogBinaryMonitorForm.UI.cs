@@ -118,16 +118,20 @@ public partial class BsnesTraceLogBinaryMonitorForm
     private void btnTracelogHelpClick(object sender, EventArgs e)
     {
         MessageBox.Show("What is this? \r\n" +
-                        "Connect via socket to a special build of BSNES-plus and capture live tracelog as you play the game " +
+                        "Connect via socket to a supported emulator and capture live tracelog as you play the game " +
                         "in realtime or play back a movie/recording/TAS.\r\n\r\n" +
-                        "As each instruction is visited by the CPU, info like X,M,DB,D and flags are capture and " +
-                        "logged in Diz.  This will greatly aid in dissasembly.\r\n\r\n" +
-                        "If you're just starting a ROM hacking project from scratch, you want to see this" +
-                        " capture a lot of modified data for X,M,DP,DB and marking bytes as Opcode/Operands.\r\n\r\n" +
+                        "As each instruction is visited by the CPU, info like X, M, DB, D and flags are capture and " +
+                        "logged in Diz. This will greatly aid in dissasembly.\r\n\r\n" +
+                        "If you're just starting a ROM hacking project from scratch, you want to see this " +
+                        "capture a lot of modified data for X, M, DP, DB and marking bytes as Opcode/Operands.\r\n\r\n" +
                         "If you're far into a ROM hacking project, you will start seeing fewer NEWLY DISCOVERED " +
                         "modifications here. Try playing through different parts of the game, menus, every " +
                         "combination of searching you can do to allow this tool to discover as much as it can.\r\n\r\n" +
-                        "When you close this window, try exporting your disassembly and see how much you uncovered!\r\n");
+                        "When you close this window, try exporting your disassembly and see how much you uncovered!\r\n\r\n" +
+                        "At this time, known supported emulators are a custom build of BSNES-plus and MesenCE.\r\n\r\n" +
+                        "NOTE: The emulator might buffer trace data for performance reasons, so once you're done capturing, " +
+                        "it's recommend to close the connection from the emulator side first so that it " +
+                        "can flush any remaining buffers. Otherwise some data might get lost.\r\n");
     }
     
             
