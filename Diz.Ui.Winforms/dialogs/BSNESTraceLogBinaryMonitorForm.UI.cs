@@ -56,13 +56,39 @@ public partial class BsnesTraceLogBinaryMonitorForm
     {
         var running = captureController?.Running ?? false;
         var finishing = captureController?.Finishing ?? false;
+        var connecting = captureController?.EstablishingConnection ?? false;
 
-        lblStatus.Text = !running ? "Not running" : finishing ? "Stopping..." : "Running";
+        bool showStatusSpinner = false;
+        bool showResultSpinner = false;
+
+        lblStatus.Text = "Not running";
+        lblStatus.ForeColor = Color.Red;
+        if (running)
+        {
+            if (connecting)
+            {
+                lblStatus.Text = "Connecting...";
+                lblStatus.ForeColor = Color.DodgerBlue;
+                showStatusSpinner = true;
+            }
+            else if (finishing)
+            {
+                lblStatus.Text = "Stopping...";
+                showStatusSpinner = true;
+            }
+            else
+            {
+                lblStatus.Text = "Running";
+                lblStatus.ForeColor = Color.ForestGreen;
+                showResultSpinner = true;
+            }
+        }
 
         btnFinish.Enabled = !finishing && running;
         btnStart.Enabled = !running;
 
-        pictureGreenSpinner.Visible = pictureGreenSpinner.Enabled = running;
+        pictureSpinnerStatus.Visible = pictureSpinnerStatus.Enabled = showStatusSpinner;
+        pictureSpinnerResult.Visible = pictureSpinnerResult.Enabled = showResultSpinner;
 
         if (running)
         {
@@ -101,48 +127,55 @@ public partial class BsnesTraceLogBinaryMonitorForm
         lblModifiedFlags.Text = ByteSize.FromBytes(stats.NumMarksModified).ToString("0.00");
         lblModifiedXFlags.Text = ByteSize.FromBytes(stats.NumXFlagsModified).ToString("0.00");
         lblModifiedMFlags.Text = ByteSize.FromBytes(stats.NumMFlagsModified).ToString("0.00");
-        
+
         // TODO: implement me. this one will also go up and down.
         // lblNumCommentsMarked.Text = ByteSize.FromBytes(stats.NumCommentsMarked).ToString("0.00");
-        
-
-        captureController.CaptureSettings = new BsnesTraceLogCaptureController.TraceLogCaptureSettings
-        {
-            RemoveTracelogLabels = chkRemoveTLComments.Checked,
-            AddTracelogLabel = chkAddTLComments.Checked,
-            CommentTextToAdd = !chkAddTLComments.Checked ? "" : txtTracelogComment.Text,
-            CaptureLabelsOnly = chkCaptureLabelsOnly.Checked
-        };
     }
 
     private void btnTracelogHelpClick(object sender, EventArgs e)
     {
         MessageBox.Show("What is this? \r\n" +
-                        "Connect via socket to a special build of BSNES-plus and capture live tracelog as you play the game " +
+                        "Connect via socket to a supported emulator and capture live tracelog as you play the game " +
                         "in realtime or play back a movie/recording/TAS.\r\n\r\n" +
-                        "As each instruction is visited by the CPU, info like X,M,DB,D and flags are capture and " +
-                        "logged in Diz.  This will greatly aid in dissasembly.\r\n\r\n" +
-                        "If you're just starting a ROM hacking project from scratch, you want to see this" +
-                        " capture a lot of modified data for X,M,DP,DB and marking bytes as Opcode/Operands.\r\n\r\n" +
+                        "As each instruction is visited by the CPU, info like X, M, DB, D and flags are capture and " +
+                        "logged in Diz. This will greatly aid in dissasembly.\r\n\r\n" +
+                        "If you're just starting a ROM hacking project from scratch, you want to see this " +
+                        "capture a lot of modified data for X, M, DP, DB and marking bytes as Opcode/Operands.\r\n\r\n" +
                         "If you're far into a ROM hacking project, you will start seeing fewer NEWLY DISCOVERED " +
                         "modifications here. Try playing through different parts of the game, menus, every " +
                         "combination of searching you can do to allow this tool to discover as much as it can.\r\n\r\n" +
-                        "When you close this window, try exporting your disassembly and see how much you uncovered!\r\n");
+                        "When you close this window, try exporting your disassembly and see how much you uncovered!\r\n\r\n" +
+                        "At this time, known supported emulators are a custom build of BSNES-plus and MesenCE.\r\n\r\n" +
+                        "NOTE: The emulator might buffer trace data for performance reasons, so once you're done capturing, " +
+                        "it's recommend to close the connection from the emulator side first so that it " +
+                        "can flush any remaining buffers. Otherwise some data might get lost.\r\n");
     }
     
-            
-    private void txtTracelogComment_TextChanged(object sender, EventArgs e)
+
+    // This one is in "Leave" rather than "TextChanged" so that whenever we change the comment
+    // while a capture is running, the unfinished string won't affect what the capture writes
+    // to our output.
+    private void txtTracelogComment_Leave(object sender, EventArgs e)
     {
-        // as soon as they type anything, disable it so they have to click the checkbox.
-        // prevent half-typed text from spamming up everything.
-        chkAddTLComments.Checked = false;
-        chkRemoveTLComments.Checked = false;
-        UpdateUi();
+        settings.CommentTextToAdd = txtTracelogComment.Text;
     }
 
-    private void chkAddTLComments_CheckedChanged(object sender, EventArgs e) => UpdateUi();
-    private void chkRemoveTLComments_CheckedChanged(object sender, EventArgs e) => UpdateUi();
-    private void chkCaptureLabelsOnly_CheckedChanged(object sender, EventArgs e) => UpdateUi();
+    private void chkAddTLComments_CheckedChanged(object sender, EventArgs e)
+    {
+        settings.AddTracelogLabel = chkAddTLComments.Checked;
+        txtTracelogComment.Enabled = chkAddTLComments.Checked;
+    }
+
+    private void chkRemoveTLComments_CheckedChanged(object sender, EventArgs e)
+    {
+        settings.RemoveTracelogLabels = chkRemoveTLComments.Checked;
+    }
+
+    private void chkCaptureLabelsOnly_CheckedChanged(object sender, EventArgs e)
+    {
+        settings.CaptureLabelsOnly = chkCaptureLabelsOnly.Checked;
+    }
+
     private void BSNESTraceLogBinaryMonitorForm_Load(object sender, EventArgs e) => UpdateUi();
     private void BSNESTraceLogBinaryMonitorForm_Shown(object sender, EventArgs e) => UpdateUi();
     private void timer1_Tick(object sender, EventArgs e) => UpdateUi();

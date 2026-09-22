@@ -1,4 +1,5 @@
-﻿using Diz.Import.bsnes.tracelog;
+﻿using Diz.Core.model;
+using Diz.Import.bsnes.tracelog;
 using Diz.Ui.Winforms.util;
 
 namespace Diz.Ui.Winforms.dialogs;
@@ -11,12 +12,25 @@ namespace Diz.Ui.Winforms.dialogs;
 public partial class BsnesTraceLogBinaryMonitorForm : Form
 {
     private readonly BsnesTraceLogCaptureController captureController;
+    private LiveCaptureUserSettings settings;
     private string lastError = "";
 
-    public BsnesTraceLogBinaryMonitorForm(BsnesTraceLogCaptureController captureController)
+    public BsnesTraceLogBinaryMonitorForm(BsnesTraceLogCaptureController captureController, LiveCaptureUserSettings settings)
     {
         this.captureController = captureController;
+        this.settings = settings;
+
         InitializeComponent();
+
+        textBoxConnectionHost.Text = this.settings.LiveCaptureHostName;
+        numericUpDownConnectionPort.Value = this.settings.LiveCapturePort;
+
+        chkRemoveTLComments.Checked = this.settings.RemoveTracelogLabels;
+        chkAddTLComments.Checked = this.settings.AddTracelogLabel;
+        txtTracelogComment.Text = this.settings.CommentTextToAdd;
+        chkCaptureLabelsOnly.Checked = this.settings.CaptureLabelsOnly;
+
+        txtTracelogComment.Enabled = chkAddTLComments.Checked;
     }
 
     private void btnStart_Click(object sender, EventArgs e)
@@ -25,12 +39,15 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
         btnFinish.Enabled = true;
         btnStart.Enabled = false;
 
+        this.settings.LiveCaptureHostName = textBoxConnectionHost.Text;
+        this.settings.LiveCapturePort = (short)numericUpDownConnectionPort.Value;
+
         Start();
     }
-    
+
     private void btnFinish_Click(object sender, EventArgs e)
     {
-        captureController.SignalToStop();
+        captureController.SignalToStop(Core.util.TaskManagerResult.Succeeded);
         UpdateUi();
     }
 
@@ -46,8 +63,13 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
 
     private void CapturingFinished(AggregateException? ex)
     {
-        if (ex != null) {
+        if (ex != null)
+        {
             OnError(ex);
+        }
+        else
+        {
+            OnSuccess();
         }
 
         timer1.Enabled = false;
@@ -58,8 +80,13 @@ public partial class BsnesTraceLogBinaryMonitorForm : Form
     {
         if (e == null)
             return;
-        
+
         Console.WriteLine(e.ToString());
-        lastError = e.InnerExceptions.Select(ex => ex.Message).Aggregate((line, val) => line += val + "\n");
+        lastError = e.InnerExceptions.Select(ex => ex.GetType().FullName + " was thrown: " + ex.Message).Aggregate((line, val) => line += val + "\n");
+    }
+
+    private void OnSuccess()
+    {
+        lastError = "";
     }
 }

@@ -16,7 +16,7 @@ public partial class MainWindow : Form, IMainGridWindowView
 
     public MainWindow(
         IProjectController projectController,
-        IDizAppSettings appSettings, 
+        IDizAppSettings appSettings,
         IDizDocument document,
         IViewFactory viewFactory,
         IAppVersionInfo appVersionInfo)
@@ -33,7 +33,7 @@ public partial class MainWindow : Form, IMainGridWindowView
 
         regionsView = viewFactory.GetRegionEditorView();
         regionsView.SetProjectController(ProjectController);
-            
+
         Document.PropertyChanged += Document_PropertyChanged;
         ProjectController.ProjectChanged += ProjectController_ProjectChanged;
         Closed += (sender, args) => OnFormClosed?.Invoke(sender, args);
@@ -45,9 +45,11 @@ public partial class MainWindow : Form, IMainGridWindowView
         };
 
         InitializeComponent();
+
+        this.AllowDrop = true;
     }
-    
-    
+
+
     [AttributeUsage(AttributeTargets.Method)]
     public class MenuItemAttribute(string menu, string name, Keys shortcutKeys = Keys.None, bool visible = true) : Attribute
     {
@@ -65,7 +67,7 @@ public partial class MainWindow : Form, IMainGridWindowView
         // so we don't need a UI designer to add simple UI elements.
         // this is the first attempt at that.  we should migrate more of the hardcoded designer stuff into here
         // example
-        
+
         // Use reflection to find methods in this class with the MenuItemAttribute
         var methodsWithMenuItems = this.GetType()
             .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic) // include non-public methods
@@ -74,11 +76,11 @@ public partial class MainWindow : Form, IMainGridWindowView
         foreach (var method in methodsWithMenuItems)
         {
             // add each menu item found to the correct dropdown menu
-            
+
             var attribute = method.GetCustomAttribute<MenuItemAttribute>();
-            if (attribute == null || attribute.Visible == false) 
+            if (attribute == null || attribute.Visible == false)
                 continue;
-            
+
             var targetMenu = menuStrip1.Items
                 .OfType<ToolStripMenuItem>() // Cast menu items to ToolStripMenuItem
                 .FirstOrDefault(menuItem =>
@@ -98,14 +100,14 @@ public partial class MainWindow : Form, IMainGridWindowView
                 ShortcutKeys = attribute.ShortcutKeys,
                 Text = attribute.Name,
             };
-            
+
             var callbackMethod = (Action)Delegate.CreateDelegate(typeof(Action), this, method);
             newMenuItem.Click += (_, _) => callbackMethod();
-            
+
             targetMenu.DropDownItems.Add(newMenuItem);
         }
     }
-    
+
     private static void InitializeConfiguration()
     {
         try
@@ -135,9 +137,9 @@ public partial class MainWindow : Form, IMainGridWindowView
     private void Init()
     {
         InitializeConfiguration();
-        
+
         AddDynamicMenuItems();
-        
+
         InitMainTable();
 
         UpdatePanels();
@@ -180,7 +182,7 @@ public partial class MainWindow : Form, IMainGridWindowView
     private void OnProjectClosing()
     {
         CloseAndDisposeOtherViews();
-        
+
         UpdateSaveOptionStates(saveEnabled: false, saveAsEnabled: false, closeEnabled: false);
     }
 
@@ -228,15 +230,15 @@ public partial class MainWindow : Form, IMainGridWindowView
     {
         var snesAddress = Project.Data.ConvertPCtoSnes(pcOffset);
         var history = Document.NavigationHistory;
-            
+
         // if our last remembered offset IS the new offset, don't record it again
         // (prevents duplication)
-        if (history.Count > 0 && history[history.Count-1].SnesOffset == snesAddress)
+        if (history.Count > 0 && history[history.Count - 1].SnesOffset == snesAddress)
             return;
 
         history.Add(
             new NavigationEntry(
-                snesAddress, 
+                snesAddress,
                 historyArgs,
                 Project.Data
             )
@@ -266,4 +268,22 @@ public partial class MainWindow : Form, IMainGridWindowView
     public event EventHandler? OnFormClosed;
 
     public void BringFormToTop() => this.BringWinFormToTop();
+
+    private void MainWindow_DragEnter(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+    }
+
+    private void MainWindow_DragDrop(object sender, DragEventArgs e)
+    {
+        string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+        if (files.Length > 0)
+        {
+            ProjectController.OpenProject(files[0]);
+        }
+    }
 }

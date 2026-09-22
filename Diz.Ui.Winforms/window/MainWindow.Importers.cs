@@ -60,8 +60,8 @@ public partial class MainWindow
         if (snesData == null)
             return;
             
-        var captureController = new BsnesTraceLogCaptureController(snesData);
-        new BsnesTraceLogBinaryMonitorForm(captureController).ShowDialog();
+        var captureController = new BsnesTraceLogCaptureController(snesData, Project.ProjectUserSettings.LiveCaptureSettings);
+        new BsnesTraceLogBinaryMonitorForm(captureController, Project.ProjectUserSettings.LiveCaptureSettings).ShowDialog();
             
         RefreshUi();
     }
