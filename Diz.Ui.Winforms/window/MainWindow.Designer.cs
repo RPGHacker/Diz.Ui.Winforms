@@ -29,20 +29,20 @@ partial class MainWindow
     private void InitializeComponent()
     {
         components = new System.ComponentModel.Container();
-        DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle25 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
         table = new DataGridView();
         ColumnAlias = new DataGridViewTextBoxColumn();
@@ -154,6 +154,7 @@ partial class MainWindow
         openTraceLogDialog = new OpenFileDialog();
         openCDLDialog = new OpenFileDialog();
         timer1 = new System.Windows.Forms.Timer(components);
+        timerLifeCaptureUpdate = new System.Windows.Forms.Timer(components);
         ((System.ComponentModel.ISupportInitialize)table).BeginInit();
         menuStrip1.SuspendLayout();
         statusStrip1.SuspendLayout();
@@ -168,14 +169,14 @@ partial class MainWindow
         table.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
         table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         table.Columns.AddRange(new DataGridViewColumn[] { ColumnAlias, ColumnPC, ColumnChar, ColumnHex, ColumnPoints, ColumnInstruction, ColumnIA, ColumnFlag, ColumnDB, ColumnDP, ColumnM, ColumnX, ColumnComment });
-        dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle14.BackColor = SystemColors.Window;
-        dataGridViewCellStyle14.Font = new Font("Consolas", 8.25F);
-        dataGridViewCellStyle14.ForeColor = SystemColors.ControlText;
-        dataGridViewCellStyle14.SelectionBackColor = Color.CornflowerBlue;
-        dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
-        table.DefaultCellStyle = dataGridViewCellStyle14;
+        dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle28.BackColor = SystemColors.Window;
+        dataGridViewCellStyle28.Font = new Font("Consolas", 8.25F);
+        dataGridViewCellStyle28.ForeColor = SystemColors.ControlText;
+        dataGridViewCellStyle28.SelectionBackColor = Color.CornflowerBlue;
+        dataGridViewCellStyle28.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle28.WrapMode = DataGridViewTriState.False;
+        table.DefaultCellStyle = dataGridViewCellStyle28;
         table.Location = new Point(0, 24);
         table.Margin = new Padding(0);
         table.MultiSelect = false;
@@ -200,9 +201,9 @@ partial class MainWindow
         // 
         // ColumnAlias
         // 
-        dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleRight;
-        dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
-        ColumnAlias.DefaultCellStyle = dataGridViewCellStyle1;
+        dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleRight;
+        dataGridViewCellStyle15.Font = new Font("Microsoft Sans Serif", 8.25F);
+        ColumnAlias.DefaultCellStyle = dataGridViewCellStyle15;
         ColumnAlias.HeaderText = "Label";
         ColumnAlias.MaxInputLength = 60;
         ColumnAlias.MinimumWidth = 6;
@@ -212,9 +213,9 @@ partial class MainWindow
         // 
         // ColumnPC
         // 
-        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F);
-        ColumnPC.DefaultCellStyle = dataGridViewCellStyle2;
+        dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle16.Font = new Font("Consolas", 8.25F);
+        ColumnPC.DefaultCellStyle = dataGridViewCellStyle16;
         ColumnPC.HeaderText = "PC";
         ColumnPC.MaxInputLength = 6;
         ColumnPC.MinimumWidth = 6;
@@ -225,9 +226,9 @@ partial class MainWindow
         // 
         // ColumnChar
         // 
-        dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
-        dataGridViewCellStyle3.Font = new Font("Consolas", 8.25F);
-        ColumnChar.DefaultCellStyle = dataGridViewCellStyle3;
+        dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleRight;
+        dataGridViewCellStyle17.Font = new Font("Consolas", 8.25F);
+        ColumnChar.DefaultCellStyle = dataGridViewCellStyle17;
         ColumnChar.HeaderText = "@";
         ColumnChar.MaxInputLength = 1;
         ColumnChar.MinimumWidth = 6;
@@ -238,9 +239,9 @@ partial class MainWindow
         // 
         // ColumnHex
         // 
-        dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
-        dataGridViewCellStyle4.Font = new Font("Consolas", 8.25F);
-        ColumnHex.DefaultCellStyle = dataGridViewCellStyle4;
+        dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleRight;
+        dataGridViewCellStyle18.Font = new Font("Consolas", 8.25F);
+        ColumnHex.DefaultCellStyle = dataGridViewCellStyle18;
         ColumnHex.HeaderText = "#";
         ColumnHex.MaxInputLength = 3;
         ColumnHex.MinimumWidth = 6;
@@ -251,9 +252,9 @@ partial class MainWindow
         // 
         // ColumnPoints
         // 
-        dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        dataGridViewCellStyle5.Font = new Font("Consolas", 8.25F);
-        ColumnPoints.DefaultCellStyle = dataGridViewCellStyle5;
+        dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dataGridViewCellStyle19.Font = new Font("Consolas", 8.25F);
+        ColumnPoints.DefaultCellStyle = dataGridViewCellStyle19;
         ColumnPoints.HeaderText = "<*>";
         ColumnPoints.MaxInputLength = 3;
         ColumnPoints.MinimumWidth = 6;
@@ -263,9 +264,9 @@ partial class MainWindow
         // 
         // ColumnInstruction
         // 
-        dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle6.Font = new Font("Consolas", 8.25F);
-        ColumnInstruction.DefaultCellStyle = dataGridViewCellStyle6;
+        dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle20.Font = new Font("Consolas", 8.25F);
+        ColumnInstruction.DefaultCellStyle = dataGridViewCellStyle20;
         ColumnInstruction.HeaderText = "Instruction";
         ColumnInstruction.MaxInputLength = 64;
         ColumnInstruction.MinimumWidth = 6;
@@ -276,9 +277,9 @@ partial class MainWindow
         // 
         // ColumnIA
         // 
-        dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle7.Font = new Font("Consolas", 8.25F);
-        ColumnIA.DefaultCellStyle = dataGridViewCellStyle7;
+        dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle21.Font = new Font("Consolas", 8.25F);
+        ColumnIA.DefaultCellStyle = dataGridViewCellStyle21;
         ColumnIA.HeaderText = "IA";
         ColumnIA.MaxInputLength = 6;
         ColumnIA.MinimumWidth = 6;
@@ -289,8 +290,8 @@ partial class MainWindow
         // 
         // ColumnFlag
         // 
-        dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 8.25F);
-        ColumnFlag.DefaultCellStyle = dataGridViewCellStyle8;
+        dataGridViewCellStyle22.Font = new Font("Microsoft Sans Serif", 8.25F);
+        ColumnFlag.DefaultCellStyle = dataGridViewCellStyle22;
         ColumnFlag.HeaderText = "Flag";
         ColumnFlag.MinimumWidth = 6;
         ColumnFlag.Name = "ColumnFlag";
@@ -299,9 +300,9 @@ partial class MainWindow
         // 
         // ColumnDB
         // 
-        dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleRight;
-        dataGridViewCellStyle9.Font = new Font("Consolas", 8.25F);
-        ColumnDB.DefaultCellStyle = dataGridViewCellStyle9;
+        dataGridViewCellStyle23.Alignment = DataGridViewContentAlignment.MiddleRight;
+        dataGridViewCellStyle23.Font = new Font("Consolas", 8.25F);
+        ColumnDB.DefaultCellStyle = dataGridViewCellStyle23;
         ColumnDB.HeaderText = "B";
         ColumnDB.MaxInputLength = 2;
         ColumnDB.MinimumWidth = 6;
@@ -311,9 +312,9 @@ partial class MainWindow
         // 
         // ColumnDP
         // 
-        dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle10.Font = new Font("Consolas", 8.25F);
-        ColumnDP.DefaultCellStyle = dataGridViewCellStyle10;
+        dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle24.Font = new Font("Consolas", 8.25F);
+        ColumnDP.DefaultCellStyle = dataGridViewCellStyle24;
         ColumnDP.HeaderText = "D";
         ColumnDP.MaxInputLength = 4;
         ColumnDP.MinimumWidth = 6;
@@ -323,9 +324,9 @@ partial class MainWindow
         // 
         // ColumnM
         // 
-        dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        dataGridViewCellStyle11.Font = new Font("Consolas", 8.25F);
-        ColumnM.DefaultCellStyle = dataGridViewCellStyle11;
+        dataGridViewCellStyle25.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dataGridViewCellStyle25.Font = new Font("Consolas", 8.25F);
+        ColumnM.DefaultCellStyle = dataGridViewCellStyle25;
         ColumnM.HeaderText = "M";
         ColumnM.MaxInputLength = 2;
         ColumnM.MinimumWidth = 6;
@@ -335,9 +336,9 @@ partial class MainWindow
         // 
         // ColumnX
         // 
-        dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        dataGridViewCellStyle12.Font = new Font("Consolas", 8.25F);
-        ColumnX.DefaultCellStyle = dataGridViewCellStyle12;
+        dataGridViewCellStyle26.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dataGridViewCellStyle26.Font = new Font("Consolas", 8.25F);
+        ColumnX.DefaultCellStyle = dataGridViewCellStyle26;
         ColumnX.HeaderText = "X";
         ColumnX.MaxInputLength = 2;
         ColumnX.MinimumWidth = 6;
@@ -348,9 +349,9 @@ partial class MainWindow
         // ColumnComment
         // 
         ColumnComment.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle13.Font = new Font("Microsoft Sans Serif", 8.25F);
-        ColumnComment.DefaultCellStyle = dataGridViewCellStyle13;
+        dataGridViewCellStyle27.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle27.Font = new Font("Microsoft Sans Serif", 8.25F);
+        ColumnComment.DefaultCellStyle = dataGridViewCellStyle27;
         ColumnComment.HeaderText = "Comment";
         ColumnComment.MinimumWidth = 6;
         ColumnComment.Name = "ColumnComment";
@@ -1067,6 +1068,11 @@ partial class MainWindow
         timer1.Interval = 2000;
         timer1.Tick += timer1_Tick;
         // 
+        // timerLifeCaptureUpdate
+        // 
+        timerLifeCaptureUpdate.Interval = 1000;
+        timerLifeCaptureUpdate.Tick += timerLifeCaptureUpdate_Tick;
+        // 
         // MainWindow
         // 
         AutoScaleDimensions = new SizeF(96F, 96F);
@@ -1210,4 +1216,5 @@ partial class MainWindow
     private System.Windows.Forms.ToolStripMenuItem toolStrip_exportDisassemblyEditSettingsFirst;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
     private System.Windows.Forms.ToolStripMenuItem toolStrip_openExportDirectory;
+    private System.Windows.Forms.Timer timerLifeCaptureUpdate;
 }

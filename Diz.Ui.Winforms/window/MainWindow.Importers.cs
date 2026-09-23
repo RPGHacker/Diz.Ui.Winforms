@@ -6,6 +6,10 @@ namespace Diz.Ui.Winforms.window;
 
 public partial class MainWindow
 {
+    private BsnesTraceLogBinaryMonitorForm? liveCaptureDialog = null;
+
+    private BsnesTraceLogCaptureController? captureController = null;
+
     private void ImportBizhawkCDL()
     {
         var filename = PromptOpenBizhawkCDLFile();
@@ -56,14 +60,48 @@ public partial class MainWindow
 
     private void ImportBsnesBinaryTraceLog()
     {
+        if (liveCaptureDialog != null)
+        {
+            liveCaptureDialog.Focus();
+            return;
+        }
+
         var snesData = Project.Data.GetSnesApi();
         if (snesData == null)
             return;
-            
-        var captureController = new BsnesTraceLogCaptureController(snesData, Project.ProjectUserSettings.LiveCaptureSettings);
-        new BsnesTraceLogBinaryMonitorForm(captureController, Project.ProjectUserSettings.LiveCaptureSettings).ShowDialog();
-            
+
+        timerLifeCaptureUpdate.Enabled = true;
+
+        captureController = new BsnesTraceLogCaptureController(snesData, Project.ProjectUserSettings.LiveCaptureSettings);
+        liveCaptureDialog = new BsnesTraceLogBinaryMonitorForm(captureController, Project.ProjectUserSettings.LiveCaptureSettings);
+        liveCaptureDialog.Show();
+        liveCaptureDialog.Disposed += LiveCaptureDialog_Disposed;
+
         RefreshUi();
+    }
+
+    private void LiveCaptureDialog_Disposed(object? sender, EventArgs e)
+    {
+        liveCaptureDialog.Disposed -= LiveCaptureDialog_Disposed;
+        liveCaptureDialog = null;
+        captureController = null;
+
+        timerLifeCaptureUpdate.Enabled = false;
+
+        RefreshUi();
+    }
+
+    private void timerLifeCaptureUpdate_Tick(object sender, EventArgs e)
+    {
+        if (captureController == null)
+        {
+            return;
+        }
+
+        if (captureController.Running)
+        {
+            RefreshUi();
+        }
     }
 
     private void OnImportedProjectSuccess()

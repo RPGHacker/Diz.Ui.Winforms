@@ -135,7 +135,7 @@ public partial class BsnesTraceLogBinaryMonitorForm
 
         DateTime currentTime = DateTime.Now;
         Double timeSinceCommentUpdate = ((TimeSpan)(currentTime - lastCommentUpdateTime)).TotalMilliseconds;
-        if (timeSinceCommentUpdate >= 3000.0 && settings.CommentTextToAdd != txtTracelogComment.Text)
+        if (timeSinceCommentUpdate >= 2000.0 && settings.CommentTextToAdd != txtTracelogComment.Text)
         {
             UpdateCommentTextSetting();
         }
