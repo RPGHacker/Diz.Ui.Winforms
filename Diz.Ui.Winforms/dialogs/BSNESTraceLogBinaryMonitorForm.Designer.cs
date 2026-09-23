@@ -388,6 +388,8 @@
             txtTracelogComment.Name = "txtTracelogComment";
             txtTracelogComment.Size = new Size(348, 23);
             txtTracelogComment.TabIndex = 32;
+            txtTracelogComment.TextChanged += txtTracelogComment_TextChanged;
+            txtTracelogComment.KeyDown += txtTracelogComment_KeyDown;
             txtTracelogComment.Leave += txtTracelogComment_Leave;
             // 
             // label2
@@ -526,6 +528,8 @@
             Text = "Emulator Live Tracelog Capture";
             Load += BSNESTraceLogBinaryMonitorForm_Load;
             Shown += BSNESTraceLogBinaryMonitorForm_Shown;
+            Click += BsnesTraceLogBinaryMonitorForm_Click;
+            MouseClick += BsnesTraceLogBinaryMonitorForm_MouseClick;
             ((System.ComponentModel.ISupportInitialize)pictureSpinnerResult).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownConnectionPort).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureSpinnerStatus).EndInit();

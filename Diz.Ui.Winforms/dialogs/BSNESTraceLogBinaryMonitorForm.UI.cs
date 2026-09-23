@@ -17,6 +17,8 @@ public partial class BsnesTraceLogBinaryMonitorForm
     private const int refreshGraphEveryNDataPoints = 100;
     private int dataPointsIn = -1;
 
+    private DateTime lastCommentUpdateTime = DateTime.Now;
+
     private void AppendToChart((BsnesTraceLogImporter.Stats stats, int bytesInQueue) currentStats)
     {
         InitChart();
@@ -130,6 +132,13 @@ public partial class BsnesTraceLogBinaryMonitorForm
 
         // TODO: implement me. this one will also go up and down.
         // lblNumCommentsMarked.Text = ByteSize.FromBytes(stats.NumCommentsMarked).ToString("0.00");
+
+        DateTime currentTime = DateTime.Now;
+        Double timeSinceCommentUpdate = ((TimeSpan)(currentTime - lastCommentUpdateTime)).TotalMilliseconds;
+        if (timeSinceCommentUpdate >= 3000.0 && settings.CommentTextToAdd != txtTracelogComment.Text)
+        {
+            UpdateCommentTextSetting();
+        }
     }
 
     private void btnTracelogHelpClick(object sender, EventArgs e)
@@ -157,7 +166,7 @@ public partial class BsnesTraceLogBinaryMonitorForm
     // to our output.
     private void txtTracelogComment_Leave(object sender, EventArgs e)
     {
-        settings.CommentTextToAdd = txtTracelogComment.Text;
+        UpdateCommentTextSetting();
     }
 
     private void chkAddTLComments_CheckedChanged(object sender, EventArgs e)
@@ -174,6 +183,50 @@ public partial class BsnesTraceLogBinaryMonitorForm
     private void chkCaptureLabelsOnly_CheckedChanged(object sender, EventArgs e)
     {
         settings.CaptureLabelsOnly = chkCaptureLabelsOnly.Checked;
+    }
+
+    private void UpdateCommentTextSetting()
+    {
+        settings.CommentTextToAdd = txtTracelogComment.Text;
+    }
+
+    private void ForceUnfocusCommentTextBox()
+    {
+        if (txtTracelogComment.Focused)
+        {
+            button1.Focus();
+        }
+    }
+    private void txtTracelogComment_TextChanged(object sender, EventArgs e)
+    {
+        if (!timer1.Enabled)
+        {
+            UpdateCommentTextSetting();
+            return;
+        }
+
+        lastCommentUpdateTime = DateTime.Now;
+    }
+
+    private void txtTracelogComment_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Escape)
+        {
+            ForceUnfocusCommentTextBox();
+        }
+    }
+
+    // These currently do nothing, because the form doesn't receive click events.
+    // Would still be a good idea to force the comment text to update on clicking elsewhere,
+    // so consider refactoring this code a TODO for the future.
+    private void BsnesTraceLogBinaryMonitorForm_MouseClick(object sender, MouseEventArgs e)
+    {
+        ForceUnfocusCommentTextBox();
+    }
+
+    private void BsnesTraceLogBinaryMonitorForm_Click(object sender, EventArgs e)
+    {
+        ForceUnfocusCommentTextBox();
     }
 
     private void BSNESTraceLogBinaryMonitorForm_Load(object sender, EventArgs e) => UpdateUi();
